@@ -87,7 +87,7 @@ sim.release()                  # 到達時にオブジェクトを離す
 3. **巡回**: `sim.move_arm()` で 4 点を順に移動させる
 
 ### 🎬 正解動作の動画
-![課題 1 正解動作](./video/assignment_1_correct.mp4)
+<img src="./video/assignment_1_correct.gif" alt="課題 1 正解動作" width="640">
 
 ---
 
@@ -108,7 +108,7 @@ sim.release()                  # 到達時にオブジェクトを離す
    - ロボットのハンドは常に下向き（roll = math.pi）に保つこと
 
 ### 🎬 正解動作の動画
-![課題 2 正解動作](./video/assignment_2_correct.mp4)
+<img src="./video/assignment_2_correct.gif" alt="課題 2 正解動作" width="640">
 
 ---
 
