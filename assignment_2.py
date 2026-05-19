@@ -44,13 +44,14 @@ T_camera2obj = FRAME(xyzrpy=[0.4, -0.1, 0.1, 0.0, -math.radians(30), 0.0])
 #  ステップ 1: 座標系の計算
 # =============================================================================
 # >>> ここから解答 <<<
-# T_base2obj = ...
-# T_place_relative_obj = ...
+T_base2obj = T_base2camera * T_camera2obj
+T_pick = T_base2obj
+
 # >>> ここまで解答 <<<
 
 # シミュレーション用初期化（解答未完了でもエラーにならないよう仮定義）
-T_base2obj = T_home
-T_pick = T_home
+# T_base2obj = T_home
+# T_pick = T_home
 
 
 # =============================================================================
@@ -70,7 +71,7 @@ sim = RobotSimulation(xml_path)
 
 # 座標軸を描画
 # >>> ここから解答 <<<
-# sim.draw_axes(...)
+sim.draw_axes(T_home, T_place, T_base2obj)
 # >>> ここまで解答 <<<
 
 # 部品オブジェクトを配置（計算したワールド座標に表示）
@@ -78,7 +79,20 @@ sim.spawn_object(T_base2obj)
 
 # ピッキングシーケンス
 # >>> ここから解答 <<<
-# sim.move_arm(...
+
+# 1. 初期位置へ移動
+sim.move_arm(T_home)
+
+# 2. ピック位置へ移動 → 掴む
+sim.move_arm(T_pick)
+sim.catch()
+
+# 3. プレース位置へ移動 → 離す
+sim.move_arm(T_place)
+sim.release()
+
+# 4. 再び初期位置へ戻る
+sim.move_arm(T_home)
 # >>> ここまで解答 <<<
 
 sim.run()
