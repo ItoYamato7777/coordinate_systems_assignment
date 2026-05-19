@@ -43,7 +43,10 @@ T_pallet2corner_4 = FRAME(xyzrpy=[ 0.1, -0.1, 0.0, 0.0, 0.0, 0.0])  # 右手前
 #  ワールド座標系での 4 隅のターゲットを計算する
 # =============================================================================
 # >>> ここから解答 <<<
-# T_base2corner_1 = ...
+T_base2corner_1 = T_base2pallet * T_pallet2corner_1
+T_base2corner_2 = T_base2pallet * T_pallet2corner_2
+T_base2corner_3 = T_base2pallet * T_pallet2corner_3
+T_base2corner_4 = T_base2pallet * T_pallet2corner_4
 # >>> ここまで解答 <<<
 
 
@@ -55,7 +58,7 @@ sim = RobotSimulation(xml_path)
 
 # 座標軸を描画
 # >>> ここから解答 <<<
-# sim.draw_axes(...)
+sim.draw_axes(T_base2pallet)
 # >>> ここまで解答 <<<
 
 # パレットを可視化（ピンク色の薄い板）
@@ -63,7 +66,10 @@ sim.add_box(T_base2pallet, size=(0.1, 0.1, 0.01), rgba=(1.0, 0.4, 0.7, 0.5))
 
 # 隅を巡回
 # >>> ここから解答 <<<
-# sim.move_arm(...
+sim.move_arm(T_base2corner_1)
+sim.move_arm(T_base2corner_2)
+sim.move_arm(T_base2corner_3)
+sim.move_arm(T_base2corner_4)
 # >>> ここまで解答 <<<
 
 sim.run()
