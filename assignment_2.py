@@ -45,12 +45,19 @@ T_camera2obj = FRAME(xyzrpy=[0.4, -0.1, 0.1, 0.0, -math.radians(30), 0.0])
 # =============================================================================
 # >>> ここから解答 <<<
 # T_base2obj = ...
-# T_place_relative_obj = ...
+#カメラで見つけた部品のワールド座標を計算
+T_base2obj = T_base2camera * T_camera2obj
+
+#部品をパレット座標系からの相対位置に変換
+T_place2obj = -T_place * T_base2obj
+
+#つかむ
+T_pick = T_base2obj
 # >>> ここまで解答 <<<
 
 # シミュレーション用初期化（解答未完了でもエラーにならないよう仮定義）
-T_base2obj = T_home
-T_pick = T_home
+# T_base2obj = T_home
+# T_pick = T_home
 
 
 # =============================================================================
@@ -71,6 +78,9 @@ sim = RobotSimulation(xml_path)
 # 座標軸を描画
 # >>> ここから解答 <<<
 # sim.draw_axes(...)
+sim.draw_axes(T_home)
+sim.draw_axes(T_pick)
+sim.draw_axes(T_place)
 # >>> ここまで解答 <<<
 
 # 部品オブジェクトを配置（計算したワールド座標に表示）
@@ -79,6 +89,12 @@ sim.spawn_object(T_base2obj)
 # ピッキングシーケンス
 # >>> ここから解答 <<<
 # sim.move_arm(...
+sim.move_arm(T_home)
+sim.move_arm(T_pick)
+sim.catch()
+sim.move_arm(T_place)
+sim.release()
+sim.move_arm(T_home)
 # >>> ここまで解答 <<<
 
 sim.run()
