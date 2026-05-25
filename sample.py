@@ -15,8 +15,8 @@ from geo import FRAME
 from src import RobotSimulation
 
 T_work = FRAME(xyzrpy=[0.4, 0.0, 0.3, 0.0, 0.0, 0.0])     # 作業平面
-T_offset_1 = FRAME(xyzrpy=[0.0,  0.3, 0.1, math.pi, 0.3, 0.0])  # 作業平面からのオフセット 1
-T_offset_2 = FRAME(xyzrpy=[0.0, -0.1, 0.2, math.pi, -math.pi/4, 0.5])  # 作業平面からのオフセット 2
+T_offset_1 = FRAME(xyzrpy=[0.0,  0.3, 0.1, 0, 0.3, 0.0])  # 作業平面からのオフセット 1
+T_offset_2 = FRAME(xyzrpy=[0.0, -0.1, 0.2, 0, -math.pi/4, 0.5])  # 作業平面からのオフセット 2
 
 # =============================================================================
 #  ② 座標系の連結（同時変換行列の掛け算）
